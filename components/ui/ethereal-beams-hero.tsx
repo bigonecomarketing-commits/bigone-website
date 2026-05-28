@@ -686,7 +686,7 @@ export default function EtherealBeamsHero() {
               className="font-bold text-white"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(3.2rem, 6.5vw, 7.2rem)",
+                fontSize: "clamp(2.4rem, 4.8vw, 6rem)",
                 letterSpacing: "-0.04em",
                 lineHeight: 1.0,
                 marginBottom: "clamp(20px, 2.5vw, 36px)",
