@@ -35,38 +35,61 @@ export default function TeamShowcase({ members = DEFAULT_MEMBERS }: TeamShowcase
   const col3 = members.filter((_, i) => i % 3 === 2);
 
   return (
-    <div className="flex flex-col md:flex-row items-start gap-8 md:gap-10 lg:gap-14 select-none w-full max-w-5xl mx-auto py-8 px-8 md:px-10">
-      {/* ── Left: photo grid ── */}
-      <div className="flex gap-2 md:gap-3 flex-shrink-0" style={{ overflow: 'visible', padding: '12px' }}>
-        {/* Column 1 */}
-        <div className="team-col-1 flex flex-col gap-2 md:gap-3" style={{ overflow: 'visible' }}>
-          {col1.map((member) => (
-            <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
-          ))}
-        </div>
-
-        {/* Column 2 */}
-        <div className="team-col-2 flex flex-col gap-2 md:gap-3 mt-[48px] sm:mt-[56px] md:mt-[68px]" style={{ overflow: 'visible' }}>
-          {col2.map((member) => (
-            <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
-          ))}
-        </div>
-
-        {/* Column 3 */}
-        <div className="team-col-3 flex flex-col gap-2 md:gap-3 mt-[22px] sm:mt-[26px] md:mt-[32px]" style={{ overflow: 'visible' }}>
-          {col3.map((member) => (
-            <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
-          ))}
-        </div>
-      </div>
-
-      {/* ── Right: member name list ── */}
-      <div className="flex flex-col sm:grid sm:grid-cols-2 md:flex md:flex-col gap-4 md:gap-5 pt-0 md:pt-2 flex-1 w-full">
+    <>
+      {/* ── MOBILE layout: compact 2-col grid (photo + name) ── */}
+      <div className="team-mobile grid grid-cols-2 gap-x-3 gap-y-4 w-full md:hidden">
         {members.map((member) => (
-          <MemberRow key={member.id} member={member} hoveredId={hoveredId} onHover={setHoveredId} />
+          <div key={member.id} className="flex items-center gap-2.5">
+            <img
+              src={member.image}
+              alt={member.name}
+              style={{
+                width: 44, height: 52, borderRadius: 8,
+                objectFit: 'cover', objectPosition: 'top',
+                filter: 'grayscale(1) brightness(0.75)',
+                flexShrink: 0,
+              }}
+            />
+            <div style={{ minWidth: 0 }}>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0a0a', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {member.name}
+              </p>
+              <p style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginTop: 3 }}>
+                {member.role}
+              </p>
+            </div>
+          </div>
         ))}
       </div>
-    </div>
+
+      {/* ── DESKTOP layout: original staggered grid ── */}
+      <div className="hidden md:flex flex-row items-start gap-10 lg:gap-14 select-none w-full max-w-5xl mx-auto py-8 px-10">
+        {/* Left: photo grid */}
+        <div className="flex gap-3 flex-shrink-0" style={{ overflow: 'visible', padding: '12px' }}>
+          <div className="team-col-1 flex flex-col gap-3" style={{ overflow: 'visible' }}>
+            {col1.map((member) => (
+              <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
+            ))}
+          </div>
+          <div className="team-col-2 flex flex-col gap-3 mt-[68px]" style={{ overflow: 'visible' }}>
+            {col2.map((member) => (
+              <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
+            ))}
+          </div>
+          <div className="team-col-3 flex flex-col gap-3 mt-[32px]" style={{ overflow: 'visible' }}>
+            {col3.map((member) => (
+              <PhotoCard key={member.id} member={member} className="team-card" hoveredId={hoveredId} onHover={setHoveredId} />
+            ))}
+          </div>
+        </div>
+        {/* Right: name list */}
+        <div className="flex flex-col gap-5 pt-2 flex-1">
+          {members.map((member) => (
+            <MemberRow key={member.id} member={member} hoveredId={hoveredId} onHover={setHoveredId} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
