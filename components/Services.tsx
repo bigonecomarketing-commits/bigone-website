@@ -53,7 +53,7 @@ export default function Services() {
     <section id="services" className="resp-section" style={{ background: "var(--white)" }}>
       <div className="resp-container">
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 80, flexWrap: "wrap", gap: 24 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "clamp(40px, 6vw, 80px)", flexWrap: "wrap", gap: 24 }}>
           <div>
             <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gray-400)", marginBottom: 16 }}>What We Do</p>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5vw, 120px)", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.05, color: "var(--black)" }}>

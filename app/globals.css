@@ -393,6 +393,51 @@ body {
   transition: transform 0.1s ease !important;
 }
 
+/* ── Mobile scale-down (≤480px) ─────────────────────────────── */
+@media (max-width: 480px) {
+  /* Hero heading */
+  .hero-headline {
+    font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
+  }
+
+  /* Section headings */
+  h1, h2 {
+    font-size: clamp(1.4rem, 5.5vw, 3rem) !important;
+  }
+
+  /* Stat cards in hero — fit 3 in a row */
+  .hero-stat-card {
+    min-width: 90px !important;
+    max-width: 110px !important;
+    padding: 12px 10px 10px !important;
+  }
+
+  /* About / Contact / Process section: tighten the 2-col grid */
+  .resp-section {
+    padding: clamp(40px, 7vw, 80px) clamp(12px, 4vw, 32px) !important;
+  }
+
+  /* Numbers label spacing */
+  .numbers-grid .p-8 {
+    padding: 1.25rem !important;
+  }
+
+  /* Footer link text */
+  .footer-grid {
+    gap: 16px !important;
+  }
+}
+
+/* ── Small phones (≤375px) ───────────────────────────────────── */
+@media (max-width: 375px) {
+  h2 {
+    font-size: clamp(1.2rem, 5vw, 2rem) !important;
+  }
+  .resp-section {
+    padding: 32px 12px !important;
+  }
+}
+
 /* Send message button */
 @keyframes spin {
   from { transform: rotate(0deg); }

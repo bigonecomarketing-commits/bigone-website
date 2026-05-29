@@ -590,7 +590,7 @@ function AnimatedStats() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mx-auto">
+    <div className="flex flex-wrap justify-center gap-4 mx-auto" style={{ maxWidth: 520 }}>
       {items.map(({ key, value, label, i, visual }) => {
         const isActive = hovered === i;
         return (
@@ -598,10 +598,13 @@ function AnimatedStats() {
             key={key}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
+            className="hero-stat-card"
             style={{
               position: "relative",
               overflow: "hidden",
-              width: 148,
+              flex: "1 1 130px",
+              minWidth: 120,
+              maxWidth: 160,
               padding: "18px 18px 14px",
               borderRadius: 16,
               border: `1px solid ${isActive ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)"}`,
@@ -683,10 +686,10 @@ export default function EtherealBeamsHero() {
 
             {/* Headline — 2 lines */}
             <h1
-              className="font-bold text-white"
+              className="font-bold text-white hero-headline"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(1.55rem, 4.8vw, 6rem)",
+                fontSize: "clamp(2rem, 4.8vw, 6rem)",
                 letterSpacing: "-0.04em",
                 lineHeight: 1.05,
                 marginBottom: "clamp(16px, 2.5vw, 36px)",

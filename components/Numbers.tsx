@@ -14,7 +14,7 @@ const STATS = [
 export default function Numbers() {
   return (
     <section className="resp-section" style={{ background: "var(--gray-900)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <div className="resp-container">
         <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gray-500)", marginBottom: 80 }}>Impact in Numbers</p>
         <div className="numbers-grid">
           {STATS.map((s, i) => <StatBlock key={i} s={s} i={i} />)}

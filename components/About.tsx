@@ -17,10 +17,10 @@ const PILLARS = [
 
 export default function About() {
   return (
-    <section id="about" style={{ padding: "120px 40px", background: "var(--white)", borderTop: "1px solid var(--gray-200)" }}>
+    <section id="about" className="resp-section" style={{ background: "var(--white)", borderTop: "1px solid var(--gray-200)" }}>
       <div className="resp-container">
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px, 5vw, 80px)", alignItems: "start" }}>
 
           <div>
             <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gray-400)", marginBottom: 24 }}>About BigOne</p>
