@@ -686,10 +686,10 @@ export default function EtherealBeamsHero() {
               className="font-bold text-white"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.4rem, 4.8vw, 6rem)",
+                fontSize: "clamp(1.55rem, 4.8vw, 6rem)",
                 letterSpacing: "-0.04em",
-                lineHeight: 1.0,
-                marginBottom: "clamp(20px, 2.5vw, 36px)",
+                lineHeight: 1.05,
+                marginBottom: "clamp(16px, 2.5vw, 36px)",
               }}
             >
               BIG ONE — Marketing Agency<br />
