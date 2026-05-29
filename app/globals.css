@@ -393,6 +393,49 @@ body {
   transition: transform 0.1s ease !important;
 }
 
+/* ── Services grid — 2 col on mobile ────────────────────────── */
+@media (max-width: 639px) {
+  /* Card outer container */
+  .services-grid > div {
+    max-width: 100% !important;
+    height: 190px !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  /* Card title */
+  .services-grid h2 {
+    font-size: 15px !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1.1 !important;
+  }
+  /* Card description */
+  .services-grid p {
+    font-size: 9px !important;
+    max-width: 75% !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  /* Card — disable 3d so overflow:hidden clips the icon */
+  .services-grid > div {
+    transform-style: flat !important;
+  }
+  /* Card icon wrapper — constrain size */
+  .services-grid > div > *:last-child,
+  .services-grid > div > div:last-child {
+    width: 100px !important;
+    height: 100px !important;
+    right: 0px !important;
+    bottom: 0px !important;
+  }
+  /* Card icon image */
+  .services-grid img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 /* ── Mobile scale-down (≤480px) ─────────────────────────────── */
 @media (max-width: 480px) {
   /* Hero heading */
