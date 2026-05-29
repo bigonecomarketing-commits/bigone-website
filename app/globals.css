@@ -407,9 +407,10 @@ body {
 
   /* Stat cards in hero — fit 3 in a row */
   .hero-stat-card {
-    min-width: 90px !important;
-    max-width: 110px !important;
+    min-width: 82px !important;
+    max-width: 100px !important;
     padding: 12px 10px 10px !important;
+    border-radius: 12px !important;
   }
 
   /* About / Contact / Process section: tighten the 2-col grid */

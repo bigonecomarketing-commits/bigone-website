@@ -598,13 +598,12 @@ function AnimatedStats() {
             key={key}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
-            className="hero-stat-card"
             style={{
               position: "relative",
               overflow: "hidden",
-              flex: "1 1 130px",
-              minWidth: 120,
-              maxWidth: 160,
+              flex: "1 1 90px",
+              minWidth: 88,
+              maxWidth: 150,
               padding: "18px 18px 14px",
               borderRadius: 16,
               border: `1px solid ${isActive ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)"}`,
@@ -686,10 +685,10 @@ export default function EtherealBeamsHero() {
 
             {/* Headline — 2 lines */}
             <h1
-              className="font-bold text-white hero-headline"
+              className="font-bold text-white"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem, 4.8vw, 6rem)",
+                fontSize: "clamp(1rem, 5.5vw, 6rem)",
                 letterSpacing: "-0.04em",
                 lineHeight: 1.05,
                 marginBottom: "clamp(16px, 2.5vw, 36px)",
@@ -710,8 +709,8 @@ export default function EtherealBeamsHero() {
 
             {/* Subtitle */}
             <p
-              className="text-white/60 leading-relaxed mx-auto mb-16"
-              style={{ fontSize: "clamp(15px, 1.35vw, 18px)", maxWidth: 560, lineHeight: 1.75 }}
+              className="text-white/60 leading-relaxed mx-auto mb-10"
+              style={{ fontSize: "clamp(13px, 1.35vw, 18px)", maxWidth: 560, lineHeight: 1.65 }}
             >
               BigOne handles everything — brand identity, website, social content,
               paid ads, and lead generation — so trucking and freight companies
