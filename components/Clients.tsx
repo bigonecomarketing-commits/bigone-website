@@ -160,7 +160,7 @@ export default function Clients() {
             {(compact ? [...INSTA, ...INSTA] : INSTA).map(({ src, rot }, i) => (
               <div
                 key={i}
-                className={compact ? undefined : "insta-card"}
+                className="insta-card"
                 style={{
                   flexShrink: 0,
                   width: cardW,
@@ -172,7 +172,7 @@ export default function Clients() {
                   borderRadius: cardRadius,
                   padding: cardPad,
                   boxShadow: "0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07)",
-                  transition: compact ? "none" : "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease",
+                  transition: "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease",
                 }}
               >
                 <img
