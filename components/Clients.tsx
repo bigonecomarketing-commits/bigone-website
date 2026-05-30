@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRef, useEffect, useState } from "react";
 
 const LOGOS = [
   { src: "/clients/brilliant.png",   alt: "Brilliant Solutions"  },
@@ -17,32 +18,72 @@ const LOGOS = [
   { src: "/clients/new.png",         alt: "New"                  },
 ];
 
-/* Double for seamless loop */
 const TRACK = [...LOGOS, ...LOGOS];
 
+const INSTA = [
+  { src: "/instagram/sevengroup.jpg",  rot: "-7deg" },
+  { src: "/instagram/brilliant.jpg",   rot: "4deg"  },
+  { src: "/instagram/samcity.jpg",     rot: "-3deg" },
+  { src: "/instagram/ctelog.jpg",      rot: "5deg"  },
+  { src: "/instagram/mgb.jpg",         rot: "-4deg" },
+  { src: "/instagram/akacargo.jpg",    rot: "3deg"  },
+  { src: "/instagram/karahan.jpg",     rot: "-5deg" },
+  { src: "/instagram/supportpro.jpg",  rot: "2deg"  },
+  { src: "/instagram/ptg.jpg",         rot: "-3deg" },
+  { src: "/instagram/emdcargo.jpg",    rot: "4deg"  },
+  { src: "/instagram/neweldworld.jpg", rot: "-6deg" },
+  { src: "/instagram/21trucking.jpg",  rot: "3deg"  },
+];
+
 export default function Clients() {
+  const ref = useRef<HTMLElement>(null);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const ro = new ResizeObserver(entries => {
+      setCompact(entries[0].contentRect.width < 640);
+    });
+    ro.observe(ref.current);
+    return () => ro.disconnect();
+  }, []);
+
+  // Responsive values
+  const sectionPadTop  = compact ? 48  : 96;
+  const headingMB      = compact ? 32  : 64;
+  const logoH          = compact ? 28  : 48;
+  const logoPadX       = compact ? 20  : 48;
+  const fadeW          = compact ? 60  : 180;
+  const instaTop       = compact ? 32  : 64;
+  const cardW          = compact ? 100 : 190;
+  const cardOverlap    = compact ? -36 : -65;
+  const cardPad        = compact ? 5   : 8;
+  const cardRadius     = compact ? 10  : 16;
+  const imgRadius      = compact ? 6   : 10;
+
   return (
     <section
+      ref={ref}
       id="clients"
-      style={{
-        position: "relative",
-        background: "#ffffff",
-        padding: "96px 0 0 0",
-      }}
+      style={{ position: "relative", background: "#ffffff", padding: `${sectionPadTop}px 0 0 0` }}
     >
       <div style={{ position: "relative", zIndex: 10 }}>
 
         {/* Heading */}
-        <div style={{ textAlign: "center", marginBottom: 64, padding: "0 24px" }}>
+        <div style={{ textAlign: "center", marginBottom: headingMB, padding: "0 24px" }}>
           <p style={{
-            fontSize: 11, fontWeight: 600, letterSpacing: "0.16em",
-            textTransform: "uppercase", color: "var(--gray-400)", marginBottom: 14,
+            fontSize: compact ? 10 : 11,
+            fontWeight: 600,
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            color: "var(--gray-400)",
+            marginBottom: 14,
           }}>
             Trusted by
           </p>
           <h2 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 4.5vw, 110px)",
+            fontSize: compact ? "clamp(24px, 7vw, 36px)" : "clamp(32px, 4.5vw, 110px)",
             fontWeight: 700,
             letterSpacing: "-0.04em",
             lineHeight: 1.05,
@@ -53,20 +94,18 @@ export default function Clients() {
           </h2>
         </div>
 
-        {/* Infinite scroll strip */}
+        {/* Infinite logo strip */}
         <div style={{ position: "relative", overflow: "hidden" }}>
-          {/* Edge fades */}
           <div style={{
-            position: "absolute", left: 0, top: 0, bottom: 0, width: 180, zIndex: 2,
+            position: "absolute", left: 0, top: 0, bottom: 0, width: fadeW, zIndex: 2,
             background: "linear-gradient(to right, #ffffff 0%, transparent 100%)",
             pointerEvents: "none",
           }} />
           <div style={{
-            position: "absolute", right: 0, top: 0, bottom: 0, width: 180, zIndex: 2,
+            position: "absolute", right: 0, top: 0, bottom: 0, width: fadeW, zIndex: 2,
             background: "linear-gradient(to left, #ffffff 0%, transparent 100%)",
             pointerEvents: "none",
           }} />
-
           <div style={{
             display: "flex",
             alignItems: "center",
@@ -79,7 +118,7 @@ export default function Clients() {
                 className="client-logo-wrap"
                 style={{
                   flexShrink: 0,
-                  padding: "0 48px",
+                  padding: `0 ${logoPadX}px`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -92,10 +131,10 @@ export default function Clients() {
                   height={96}
                   className="client-logo"
                   style={{
-                    height: 48,
+                    height: logoH,
                     width: "auto",
-                    maxWidth: 220,
-                    minWidth: 60,
+                    maxWidth: compact ? 120 : 220,
+                    minWidth: compact ? 40  : 60,
                     objectFit: "contain",
                   }}
                 />
@@ -105,35 +144,27 @@ export default function Clients() {
         </div>
 
         {/* Instagram fan */}
-        <div style={{ display: "flex", justifyContent: "center", padding: "64px 24px 0", overflow: "hidden" }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: `${instaTop}px 0 0`,
+          overflow: "hidden",
+        }}>
           <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
-            {[
-              { src: "/instagram/sevengroup.jpg",   rot: "-7deg"  },
-              { src: "/instagram/brilliant.jpg",    rot: "4deg"   },
-              { src: "/instagram/samcity.jpg",      rot: "-3deg"  },
-              { src: "/instagram/ctelog.jpg",       rot: "5deg"   },
-              { src: "/instagram/mgb.jpg",          rot: "-4deg"  },
-              { src: "/instagram/akacargo.jpg",     rot: "3deg"   },
-              { src: "/instagram/karahan.jpg",      rot: "-5deg"  },
-              { src: "/instagram/supportpro.jpg",   rot: "2deg"   },
-              { src: "/instagram/ptg.jpg",          rot: "-3deg"  },
-              { src: "/instagram/emdcargo.jpg",     rot: "4deg"   },
-              { src: "/instagram/neweldworld.jpg",  rot: "-6deg"  },
-              { src: "/instagram/21trucking.jpg",   rot: "3deg"   },
-            ].map(({ src, rot }, i) => (
+            {INSTA.map(({ src, rot }, i) => (
               <div
                 key={i}
                 className="insta-card"
                 style={{
                   flexShrink: 0,
-                  width: 190,
-                  marginLeft: i === 0 ? 0 : -65,
+                  width: cardW,
+                  marginLeft: i === 0 ? 0 : cardOverlap,
                   zIndex: i + 1,
                   transform: `rotate(${rot})`,
                   cursor: "pointer",
                   background: "#ffffff",
-                  borderRadius: 16,
-                  padding: 8,
+                  borderRadius: cardRadius,
+                  padding: cardPad,
                   boxShadow: "0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07)",
                   transition: "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease",
                 }}
@@ -145,7 +176,7 @@ export default function Clients() {
                     width: "100%",
                     display: "block",
                     objectFit: "cover",
-                    borderRadius: 10,
+                    borderRadius: imgRadius,
                     pointerEvents: "none",
                   }}
                 />
@@ -161,23 +192,15 @@ export default function Clients() {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
         }
-
-        @keyframes instagram-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-
         .client-logo {
           filter: grayscale(1);
           opacity: 0.45;
           transition: filter 0.35s ease, opacity 0.35s ease;
         }
-
         .client-logo-wrap:hover .client-logo {
           filter: grayscale(0);
           opacity: 1;
         }
-
         .insta-card:hover {
           transform: rotate(0deg) scale(1.12) translateY(-12px) !important;
           box-shadow: 0 24px 56px rgba(0,0,0,0.22), 0 6px 16px rgba(0,0,0,0.12) !important;
