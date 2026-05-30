@@ -105,7 +105,7 @@ export default function Clients() {
         </div>
 
         {/* Instagram fan */}
-        <div style={{ display: "flex", justifyContent: "center", padding: "64px 24px 0" }}>
+        <div style={{ display: "flex", justifyContent: "center", padding: "64px 24px 0", overflow: "hidden" }}>
           <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
             {[
               { src: "/instagram/sevengroup.jpg",   rot: "-7deg"  },
