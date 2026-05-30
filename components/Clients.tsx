@@ -143,87 +143,53 @@ export default function Clients() {
           </div>
         </div>
 
-        {/* Instagram — mobile: marquee loop | desktop: fan */}
-        {compact ? (
-          /* ── MOBILE: infinite horizontal scroll ── */
-          <div style={{ position: "relative", overflow: "hidden", padding: `${instaTop}px 0 0` }}>
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              width: "max-content",
-              animation: "insta-scroll 28s linear infinite",
-              gap: 10,
-            }}>
-              {[...INSTA, ...INSTA].map(({ src }, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flexShrink: 0,
-                    width: cardW,
-                    background: "#fff",
-                    borderRadius: cardRadius,
-                    padding: cardPad,
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-                  }}
-                >
-                  <img
-                    src={src}
-                    alt="Instagram"
-                    style={{
-                      width: "100%",
-                      display: "block",
-                      objectFit: "cover",
-                      borderRadius: imgRadius,
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          /* ── DESKTOP: stacked fan ── */
+        {/* Instagram — mobile: fan scrolling marquee | desktop: static fan */}
+        <div style={{
+          display: "flex",
+          justifyContent: compact ? "flex-start" : "center",
+          padding: `${instaTop}px 0 0`,
+          overflow: "hidden",
+        }}>
           <div style={{
             display: "flex",
-            justifyContent: "center",
-            padding: `${instaTop}px 0 0`,
-            overflow: "hidden",
+            alignItems: "center",
+            position: "relative",
+            width: "max-content",
+            animation: compact ? "insta-scroll 32s linear infinite" : "none",
           }}>
-            <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
-              {INSTA.map(({ src, rot }, i) => (
-                <div
-                  key={i}
-                  className="insta-card"
+            {(compact ? [...INSTA, ...INSTA] : INSTA).map(({ src, rot }, i) => (
+              <div
+                key={i}
+                className={compact ? undefined : "insta-card"}
+                style={{
+                  flexShrink: 0,
+                  width: cardW,
+                  marginLeft: i === 0 ? 0 : cardOverlap,
+                  zIndex: i % INSTA.length + 1,
+                  transform: `rotate(${rot})`,
+                  cursor: "pointer",
+                  background: "#ffffff",
+                  borderRadius: cardRadius,
+                  padding: cardPad,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07)",
+                  transition: compact ? "none" : "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease",
+                }}
+              >
+                <img
+                  src={src}
+                  alt="Instagram"
                   style={{
-                    flexShrink: 0,
-                    width: cardW,
-                    marginLeft: i === 0 ? 0 : cardOverlap,
-                    zIndex: i + 1,
-                    transform: `rotate(${rot})`,
-                    cursor: "pointer",
-                    background: "#ffffff",
-                    borderRadius: cardRadius,
-                    padding: cardPad,
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07)",
-                    transition: "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease",
+                    width: "100%",
+                    display: "block",
+                    objectFit: "cover",
+                    borderRadius: imgRadius,
+                    pointerEvents: "none",
                   }}
-                >
-                  <img
-                    src={src}
-                    alt="Instagram"
-                    style={{
-                      width: "100%",
-                      display: "block",
-                      objectFit: "cover",
-                      borderRadius: imgRadius,
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
+                />
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
       </div>
 
