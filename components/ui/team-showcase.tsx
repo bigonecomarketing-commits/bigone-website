@@ -44,7 +44,7 @@ export default function TeamShowcase({ members = DEFAULT_MEMBERS }: TeamShowcase
   const col2 = members.filter((_, i) => i % 3 === 1);
   const col3 = members.filter((_, i) => i % 3 === 2);
 
-  const photoColW  = compact ? 50  : undefined;
+  const photoColW  = compact ? 50  : 110;
   const colGap     = compact ? 5   : 12;
   const col2Top    = compact ? 32  : 68;
   const col3Top    = compact ? 16  : 32;
