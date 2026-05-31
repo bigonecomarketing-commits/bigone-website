@@ -171,7 +171,7 @@ export default function Navbar() {
       onClick={() => setOpen(!open)}
       className="md:hidden"
       style={{
-        position: "fixed", top: 13, right: 20, zIndex: 60,
+        position: "fixed", top: 24, right: 20, zIndex: 60,
         background: "none", border: "none",
         cursor: "pointer",
         display: "flex", alignItems: "center", justifyContent: "center",

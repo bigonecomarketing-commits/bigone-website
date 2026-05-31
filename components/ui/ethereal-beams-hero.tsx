@@ -505,7 +505,7 @@ function RingVisual({ active }: { active: boolean }) {
     <svg width="40" height="40" style={{
       position: "absolute", top: 10, right: 12,
       opacity: active ? 0.5 : 0.12, transition: "opacity 0.4s ease",
-      pointerEvents: "none",
+      pointerEvents: "none", zIndex: 10,
     }}>
       <circle cx="20" cy="20" r={r} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2.5" />
       <circle cx="20" cy="20" r={r} fill="none" stroke="white" strokeWidth="2.5"
@@ -528,7 +528,7 @@ function TrendVisual({ active }: { active: boolean }) {
     <svg width="72" height="44" viewBox="0 0 72 44" style={{
       position: "absolute", bottom: 10, right: 10,
       opacity: active ? 1 : 0.15, transition: "opacity 0.35s ease",
-      pointerEvents: "none", overflow: "visible",
+      pointerEvents: "none", overflow: "visible", zIndex: 10,
     }}>
       {/* Area fill */}
       <polyline
