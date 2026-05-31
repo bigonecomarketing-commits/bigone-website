@@ -123,15 +123,26 @@ export default function Navbar() {
           <ArrowRight size={13} />
         </button>
 
-        {/* Mobile burger */}
+        {/* Mobile burger — fixed on top of overlay */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 8, borderRadius: 8 }}
+          style={{
+            position: "fixed", top: 10, right: 16, zIndex: 60,
+            width: 40, height: 40, borderRadius: "50%",
+            background: open ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.18)",
+            backdropFilter: "blur(12px)",
+            cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background 0.3s ease, box-shadow 0.3s ease",
+            boxShadow: open ? "0 4px 24px rgba(0,0,0,0.35)" : "0 2px 8px rgba(0,0,0,0.15)",
+          }}
+          aria-label={open ? "Close menu" : "Open menu"}
         >
           <MenuToggleIcon
-            open={open} duration={300}
-            style={{ width: 22, height: 22, color: "#fff" }}
+            open={open} duration={400}
+            style={{ width: 18, height: 18, color: "#fff" }}
           />
         </button>
       </div>
@@ -139,30 +150,14 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "fixed inset-0 top-0 z-50 flex-col overflow-hidden md:hidden",
+          "fixed inset-0 top-0 flex-col overflow-hidden md:hidden",
           open ? "flex" : "hidden",
         )}
-        style={{ background: "rgba(10,10,12,0.97)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,10,12,0.97)", backdropFilter: "blur(20px)", zIndex: 55 }}
       >
         <div className="flex h-full flex-col justify-between p-6">
-          {/* Close button */}
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
-            <button
-              onClick={() => setOpen(false)}
-              style={{
-                background: "rgba(255,255,255,0.08)", border: "none", cursor: "pointer",
-                width: 40, height: 40, borderRadius: "50%",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "#fff", fontSize: 20, lineHeight: 1,
-                transition: "background 0.2s",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.15)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
-              aria-label="Close menu"
-            >
-              ✕
-            </button>
-          </div>
+          {/* Spacer for the fixed toggle button */}
+          <div style={{ height: 56 }} />
           <div style={{ display: "grid", gap: 4 }}>
             {NAV_ITEMS.map(item => (
               <button key={item.id} onClick={() => { setOpen(false); item.onClick?.(); }} style={{
