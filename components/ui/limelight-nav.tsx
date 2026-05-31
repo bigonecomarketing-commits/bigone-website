@@ -15,6 +15,7 @@ type LimelightNavProps = {
   onTabChange?: (index: number) => void;
   className?: string;
   isDark?: boolean;
+  compact?: boolean;
 };
 
 export const LimelightNav = ({
@@ -23,6 +24,7 @@ export const LimelightNav = ({
   onTabChange,
   className = "",
   isDark = true,
+  compact = false,
 }: LimelightNavProps) => {
   const textColor = isDark ? "#ffffff" : "#0a0a0c";
   const indicatorBg = isDark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.08)";
@@ -55,7 +57,7 @@ export const LimelightNav = ({
         position: "relative",
         display: "inline-flex",
         alignItems: "center",
-        height: 44,
+        height: compact ? 36 : 44,
         borderRadius: 9999,
         overflow: "hidden", // keeps glow inside pill
         padding: "0 4px",
@@ -95,7 +97,7 @@ export const LimelightNav = ({
               display: "flex",
               alignItems: "center",
               gap: 6,
-              padding: "0 16px",
+              padding: compact ? "0 10px" : "0 16px",
               height: "100%",
               background: "none",
               border: "none",

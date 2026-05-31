@@ -20,6 +20,17 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(80);
+  const [compact, setCompact] = React.useState(true);
+  const headerRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    if (!headerRef.current) return;
+    const ro = new ResizeObserver(entries => {
+      setCompact(entries[0].contentRect.width < 768);
+    });
+    ro.observe(headerRef.current);
+    return () => ro.disconnect();
+  }, []);
 
   // Detect if current scroll position is over a dark section (hero)
   const [isDark, setIsDark] = React.useState(true);
@@ -49,6 +60,7 @@ export default function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-500 ease-out",
         scrolled && !open ? "top-4 px-4" : "bg-transparent",
@@ -78,12 +90,13 @@ export default function Navbar() {
           BigOne<span style={{ color: mutedColor, transition: "color 0.3s" }}>.</span>
         </button>
 
-        {/* LimelightNav — desktop */}
-        <div className="hidden md:flex">
+        {/* LimelightNav — all sizes (icons only on mobile) */}
+        <div className="flex">
           <LimelightNav
-            items={NAV_ITEMS}
+            items={compact ? NAV_ITEMS.map(({ label, ...rest }) => ({ ...rest })) : NAV_ITEMS}
             defaultActiveIndex={0}
             isDark={!scrolled || isDark}
+            compact={compact}
             className={
               !scrolled || isDark
                 ? "bg-white/5 backdrop-blur-xl border border-white/10"
