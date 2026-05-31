@@ -181,7 +181,7 @@ export default function Navbar() {
     >
       <MenuToggleIcon
         open={open} duration={400}
-        style={{ width: 22, height: 22, color: "#fff" }}
+        style={{ width: 22, height: 22, color: open ? "#fff" : textColor, transition: "color 0.3s" }}
       />
     </button>
     </>

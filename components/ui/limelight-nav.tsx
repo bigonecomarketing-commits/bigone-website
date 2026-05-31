@@ -61,6 +61,8 @@ export const LimelightNav = ({
         borderRadius: 9999,
         overflow: "hidden", // keeps glow inside pill
         padding: "0 4px",
+        color: textColor,
+        transition: "color 0.3s",
       }}
     >
       {/* Sliding background pill (active indicator) */}
