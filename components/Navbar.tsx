@@ -59,6 +59,7 @@ export default function Navbar() {
   const mutedColor = scrolled && !isDark ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.35)";
 
   return (
+    <>
     <header
       ref={headerRef}
       className={cn(
@@ -105,7 +106,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* CTA — desktop */}
+        {/* CTA — desktop only */}
         <button
           onClick={() => scrollTo("contact")}
           className="hidden md:flex items-center gap-2"
@@ -123,28 +124,8 @@ export default function Navbar() {
           <ArrowRight size={13} />
         </button>
 
-        {/* Mobile burger — fixed on top of overlay */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden"
-          style={{
-            position: "fixed", top: 10, right: 16, zIndex: 60,
-            width: 40, height: 40, borderRadius: "50%",
-            background: open ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.18)",
-            backdropFilter: "blur(12px)",
-            cursor: "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transition: "background 0.3s ease, box-shadow 0.3s ease",
-            boxShadow: open ? "0 4px 24px rgba(0,0,0,0.35)" : "0 2px 8px rgba(0,0,0,0.15)",
-          }}
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          <MenuToggleIcon
-            open={open} duration={400}
-            style={{ width: 18, height: 18, color: "#fff" }}
-          />
-        </button>
+        {/* Spacer for mobile burger (keeps pill layout balanced) */}
+        <div className="md:hidden" style={{ width: 30 }} />
       </div>
 
       {/* Mobile menu */}
@@ -184,5 +165,25 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+
+    {/* Mobile burger — outside header so backdrop-filter doesn't break fixed positioning */}
+    <button
+      onClick={() => setOpen(!open)}
+      className="md:hidden"
+      style={{
+        position: "fixed", top: 13, right: 20, zIndex: 60,
+        background: "none", border: "none",
+        cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: 4,
+      }}
+      aria-label={open ? "Close menu" : "Open menu"}
+    >
+      <MenuToggleIcon
+        open={open} duration={400}
+        style={{ width: 22, height: 22, color: "#fff" }}
+      />
+    </button>
+    </>
   );
 }
