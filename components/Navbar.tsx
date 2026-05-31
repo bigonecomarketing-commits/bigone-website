@@ -25,14 +25,18 @@ export default function Navbar() {
   const [isDark, setIsDark] = React.useState(true);
 
   React.useEffect(() => {
+    const getY = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const update = () => {
-      // Hero is ~100vh tall; below it all sections are light/white
       const heroHeight = window.innerHeight * 0.9;
-      setIsDark(window.scrollY < heroHeight);
+      setIsDark(getY() < heroHeight);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    document.body.addEventListener("scroll", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      document.body.removeEventListener("scroll", update);
+    };
   }, []);
 
   React.useEffect(() => {
@@ -47,7 +51,7 @@ export default function Navbar() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-500 ease-out",
-        scrolled && !open ? "md:top-4 md:px-4" : "bg-transparent",
+        scrolled && !open ? "top-4 px-4" : "bg-transparent",
       )}
     >
       <div
@@ -55,8 +59,8 @@ export default function Navbar() {
           "mx-auto flex h-16 items-center justify-between transition-all duration-500 ease-out",
           scrolled && !open
             ? isDark
-              ? "max-w-[920px] rounded-2xl border border-white/20 bg-white/10 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl md:h-[52px]"
-              : "max-w-[920px] rounded-2xl border border-black/10 bg-black/8 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-2xl md:h-[52px]"
+              ? "max-w-[920px] rounded-2xl border border-white/20 bg-white/10 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl h-[48px]"
+              : "max-w-[920px] rounded-2xl border border-black/10 bg-black/8 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-2xl h-[48px]"
             : "max-w-7xl bg-transparent px-6 lg:px-8",
         )}
       >
@@ -122,7 +126,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "fixed inset-0 top-16 z-50 flex-col overflow-hidden md:hidden",
+          "fixed inset-0 top-0 z-50 flex-col overflow-hidden md:hidden",
           open ? "flex" : "hidden",
         )}
         style={{ background: "rgba(10,10,12,0.97)", backdropFilter: "blur(20px)" }}
