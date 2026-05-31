@@ -145,6 +145,24 @@ export default function Navbar() {
         style={{ background: "rgba(10,10,12,0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="flex h-full flex-col justify-between p-6">
+          {/* Close button */}
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+            <button
+              onClick={() => setOpen(false)}
+              style={{
+                background: "rgba(255,255,255,0.08)", border: "none", cursor: "pointer",
+                width: 40, height: 40, borderRadius: "50%",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "#fff", fontSize: 20, lineHeight: 1,
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.15)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
           <div style={{ display: "grid", gap: 4 }}>
             {NAV_ITEMS.map(item => (
               <button key={item.id} onClick={() => { setOpen(false); item.onClick?.(); }} style={{
